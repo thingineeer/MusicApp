@@ -12,39 +12,17 @@ import SwiftUI
 class ViewController: UIViewController {
     
     
-    private let tableView = UITableView()
-    
-    lazy var plusButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(plusButtonTapped))
-        return button
-    }()
+    @IBOutlet weak var musicTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        view.backgroundColor = .darkGray
-        setupNaviBar()
+        
+        musicTableView.delegate = self
+        musicTableView.dataSource = self
+        
     }
     
-    func setupNaviBar() {
-        title = "연락처 목록"
-        
-        // 네비게이션바 설정관련
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()  // 불투명으로
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.tintColor = .systemBlue
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.compactAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
-        // 네비게이션바 오른쪽 상단 버튼 설정
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem()
-    }
     
-    @objc func plusButtonTapped() {
-        
-    }
 
 }
 
@@ -60,6 +38,11 @@ extension ViewController: UITableViewDataSource {
     }
     
 
+
+}
+
+
+extension ViewController: UITableViewDelegate {
     
     
 }
