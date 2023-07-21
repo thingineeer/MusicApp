@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		714591EE2A6A9FF1007449CE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714591ED2A6A9FF1007449CE /* NetworkManager.swift */; };
 		718BEFB22A615E60000D77A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718BEFB12A615E60000D77A9 /* AppDelegate.swift */; };
 		718BEFB42A615E60000D77A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718BEFB32A615E60000D77A9 /* SceneDelegate.swift */; };
 		718BEFB62A615E60000D77A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718BEFB52A615E60000D77A9 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		714591ED2A6A9FF1007449CE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		718BEFAE2A615E60000D77A9 /* appleMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = appleMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		718BEFB12A615E60000D77A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		718BEFB32A615E60000D77A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		714591EC2A6A9FB9007449CE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				714591ED2A6A9FF1007449CE /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		718BEFA52A615E60000D77A9 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 				718BEFB12A615E60000D77A9 /* AppDelegate.swift */,
 				718BEFB32A615E60000D77A9 /* SceneDelegate.swift */,
 				71C7443C2A66B24C00D5ACCC /* Helpers */,
+				714591EC2A6A9FB9007449CE /* Network */,
 				718BEFC72A615EA0000D77A9 /* Models */,
 				718BEFC62A615E95000D77A9 /* Views */,
 				718BEFC52A615E8B000D77A9 /* Controllers */,
@@ -180,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				714591EE2A6A9FF1007449CE /* NetworkManager.swift in Sources */,
 				71C744412A66B39D00D5ACCC /* MusicCellTableViewCell.swift in Sources */,
 				718BEFB62A615E60000D77A9 /* ViewController.swift in Sources */,
 				718BEFB22A615E60000D77A9 /* AppDelegate.swift in Sources */,

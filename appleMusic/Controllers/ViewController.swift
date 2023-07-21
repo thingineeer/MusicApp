@@ -45,6 +45,11 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     
     
+    // 자동적으로 셀 높이 잡아주는 속성 (유동적 셀)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
 }
 
 
