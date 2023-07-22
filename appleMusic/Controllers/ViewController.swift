@@ -48,8 +48,10 @@ class ViewController: UIViewController {
                 print("데이터를 잘 받았음")
                 self.musicArrays = musicData
                 
-                // 테이블뷰 리로드 
-                self.musicTableView.reloadData()
+                // 테이블뷰 리로드(메인쓰레드에서)
+                DispatchQueue.main.async {
+                    self.musicTableView.reloadData()
+                }
                 
             case .failure(let error):
                 print(error.localizedDescription)
