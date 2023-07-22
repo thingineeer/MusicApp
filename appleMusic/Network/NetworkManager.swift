@@ -65,6 +65,7 @@ final class NetworkManager {
                 completion(.failure(.parseError))
             }
         }
+        
         task.resume()
     }
     

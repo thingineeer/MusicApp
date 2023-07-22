@@ -16,10 +16,14 @@ class ViewController: UIViewController {
     
     var networkManager = NetworkManager.shared
     
+    // 음악 데이터 빈배열
+    var musicArrays: [Music] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
+        setupDatas()
         
     }
     
@@ -36,7 +40,22 @@ class ViewController: UIViewController {
     
     func setupDatas() {
         
-        networkManager.fetchMusic(completionHandler: <#T##([Music]?) -> Void#>)
+        networkManager.fetchMusic(searchTerm: "jazz") { result in
+            
+            switch result {
+            case .success(let musicData):
+                
+                print("데이터를 잘 받았음")
+                self.musicArrays = musicData
+                
+                // 테이블뷰 리로드 
+                self.musicTableView.reloadData()
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                
+            }
+        }
     }
     
 
