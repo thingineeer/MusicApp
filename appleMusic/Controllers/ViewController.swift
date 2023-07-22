@@ -11,6 +11,8 @@ import SwiftUI
 
 class ViewController: UIViewController {
     
+    let searchController = UISearchController()
+    
     
     @IBOutlet weak var musicTableView: UITableView!
     
@@ -25,6 +27,14 @@ class ViewController: UIViewController {
         setupTableView()
         setupDatas()
         
+    }
+    
+    func setupSearchBar() {
+        
+        self.title = "Music Search"
+        navigationItem.searchController = searchController
+        
+        searchController.searchBar.delegate = self
     }
     
     
@@ -59,22 +69,31 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-
 }
 
 
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.musicArrays.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        
+        let cell = musicTableView.dequeueReusableCell(withIdentifier: Cell.musicCellIdentifier, for: indexPath) as! MusicCell
+        
+        cell.imageUrl = musicArrays[indexPath.row].imageUrl
+        
+        cell.songNameLabel.text = musicArrays[indexPath.row].songName
+        cell.artistNameLabel.text = musicArrays[indexPath.row].artistName
+        cell.albumNameLabel.text = musicArrays[indexPath.row].albumName
+        cell.releaseDateLabel.text = musicArrays[indexPath.row].releaseDateString
+        
+        cell.selectionStyle = .none
+        return cell
+        
+        
     }
-    
-
 
 }
 
@@ -88,6 +107,8 @@ extension ViewController: UITableViewDelegate {
     }
     
 }
+
+
 
 
 
