@@ -7,62 +7,81 @@
 
 import UIKit
 
-class NetworkManager {
-    
-    static let shared = NetworkManager()
-    
-    private init() {} // 싱글톤 패턴
-    
-    func fetchMusic(completionHandler: @escaping ([Music]?) -> Void) { // 콜백함수
+enum NetworkError: Error {
+    case networkingError
+    case dataError
+    case parseError
+}
 
-        // URL구조체 만들기
-        guard let url = URL(string: "https://itunes.apple.com/search?media=music&term=jazz") else {
-            print("Error: cannot create URL")
-            completionHandler(nil)
-            return
+//MARK: - Networking (서버와 통신하는) 클래스 모델
+
+final class NetworkManager {
+    
+    // 여러화면에서 통신을 한다면, 일반적으로 싱글톤으로 만듦
+    static let shared = NetworkManager()
+    // 여러객체를 추가적으로 생성하지 못하도록 설정
+    private init() {}
+    
+    //let musicURL = "https://itunes.apple.com/search?media=music"
+    
+    typealias NetworkCompletion = (Result<[Music], NetworkError>) -> Void
+
+    // 네트워킹 요청하는 함수 (음악데이터 가져오기)
+    func fetchMusic(searchTerm: String, completion: @escaping NetworkCompletion) {
+        let urlString = "\(MusicApi.requestUrl)\(MusicApi.mediaParam)&term=\(searchTerm)"
+        print(urlString)
+        
+        performRequest(with: urlString) { result in
+            completion(result)
         }
         
-        // URL요청 생성
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        // 요청을 가지고 작업세션시작
-        // 비동기 처리
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // 에러가 없어야 넘어감
-            guard error == nil else {
-                print("Error: error calling GET")
-                print(error!)
-                completionHandler(nil)
-                return
-            }
-            // 옵셔널 바인딩
-            guard let safeData = data else {
-                print("Error: Did not receive data")
-                completionHandler(nil)
-                return
-            }
-            // HTTP 200번대 정상코드인 경우만 다음 코드로 넘어감
-            guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-                print("Error: HTTP request failed")
-                completionHandler(nil)
-                return
-            }
-
-            // 원하는 모델이 있다면, JSONDecoder로 decode코드로 구현 ⭐️
-    //        print(String(decoding: safeData, as: UTF8.self))
-            
-            do {
-                let decoder = JSONDecoder()
-                let musicData = try decoder.decode(MusicData.self, from: safeData)
-                completionHandler(musicData.results)
-                
-            } catch {
-                
-            }
-
-
-        }.resume()     // 시작
     }
     
+    // 실제 Request하는 함수 (비동기적 실행 ===> 클로저 방식으로 끝난 시점을 전달 받도록 설계)
+    private func performRequest(with urlString: String, completion: @escaping NetworkCompletion) {
+        //print(#function)
+        guard let url = URL(string: urlString) else { return }
+        
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                completion(.failure(.networkingError))
+                return
+            }
+            
+            guard let safeData = data else {
+                completion(.failure(.dataError))
+                return
+            }
+            
+            // 메서드 실행해서, 결과를 받음
+            if let musics = self.parseJSON(safeData) {
+                print("Parse 실행")
+                completion(.success(musics))
+            } else {
+                print("Parse 실패")
+                completion(.failure(.parseError))
+            }
+        }
+        task.resume()
+    }
+    
+    // 받아본 데이터 분석하는 함수 (동기적 실행)
+    private func parseJSON(_ musicData: Data) -> [Music]? {
+        //print(#function)
+    
+        // 성공
+        do {
+            // 우리가 만들어 놓은 구조체(클래스 등)로 변환하는 객체와 메서드
+            // (JSON 데이터 ====> MusicData 구조체)
+            let musicData = try JSONDecoder().decode(MusicData.self, from: musicData)
+            return musicData.results
+        // 실패
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
 }
