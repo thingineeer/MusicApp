@@ -21,7 +21,7 @@ public enum MusicApi {
 
 // 사용하게될 Cell 문자열 묶음
 public struct Cell {
-    static let musicCellIdentifier = "MusicCell"
+    static let musicCellIdentifier = "MusicCellTableViewCell"
     static let musicCollectionViewCellIdentifier = "MusicCollectionViewCell"
     private init() {}
 }

@@ -14,14 +14,30 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var musicTableView: UITableView!
     
+    var networkManager = NetworkManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        musicTableView.delegate = self
-        musicTableView.dataSource = self
+        setupTableView()
         
     }
     
+    
+    func setupTableView() {
+        musicTableView.delegate = self
+        musicTableView.dataSource = self
+        
+        // Nib파일 사용시 등록 과정 필요
+        // 스토리보드안에 같이 등록한것이 아닌 따로 Nib파일을 만들어서 등록을 해줘야한다.
+        musicTableView.register(UINib(nibName: Cell.musicCellIdentifier, bundle: nil), forCellReuseIdentifier: Cell.musicCellIdentifier)
+    }
+    
+    
+    func setupDatas() {
+        
+        networkManager.fetchMusic(completionHandler: <#T##([Music]?) -> Void#>)
+    }
     
 
 }

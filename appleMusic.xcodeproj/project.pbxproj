@@ -81,7 +81,6 @@
 				718BEFC72A615EA0000D77A9 /* Models */,
 				718BEFC62A615E95000D77A9 /* Views */,
 				718BEFC52A615E8B000D77A9 /* Controllers */,
-				718BEFB72A615E60000D77A9 /* Main.storyboard */,
 				718BEFBA2A615E62000D77A9 /* Assets.xcassets */,
 				718BEFBC2A615E62000D77A9 /* LaunchScreen.storyboard */,
 				718BEFBF2A615E62000D77A9 /* Info.plist */,
@@ -102,6 +101,7 @@
 			children = (
 				71C7443F2A66B39D00D5ACCC /* MusicCellTableViewCell.swift */,
 				71C744402A66B39D00D5ACCC /* MusicCellTableViewCell.xib */,
+				718BEFB72A615E60000D77A9 /* Main.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
