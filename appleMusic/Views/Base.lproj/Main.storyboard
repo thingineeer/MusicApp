@@ -33,17 +33,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="AuB-oC-9p0"/>
                     <connections>
-                        <outlet property="musicTableView" destination="BlN-mO-vGS" id="oFA-vP-Amb"/>
+                        <outlet property="musicTableView" destination="BlN-mO-vGS" id="ME7-Au-Ac1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1055.7251908396945" y="-2.1126760563380285"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Result View Controller-->
         <scene sceneID="a1h-WM-xi3">
             <objects>
-                <viewController id="SDH-sZ-r1r" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultViewController" id="SDH-sZ-r1r" customClass="SearchResultViewController" customModule="appleMusic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A1f-rH-TcQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,10 +92,13 @@
                             <constraint firstItem="NUV-KE-DsF" firstAttribute="leading" secondItem="6lD-5R-rSz" secondAttribute="leading" id="ept-cT-L7w"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="NUV-KE-DsF" id="xfN-iI-H9c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zkk-ch-OXA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2363" y="-2"/>
+            <point key="canvasLocation" x="1054" y="718"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jkq-vr-amz">

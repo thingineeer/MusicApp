@@ -30,8 +30,8 @@ public struct Cell {
 
 // 컬렉션뷰 구성을 위한 설정
 public struct CVCell {
-    static let spacingWitdh: CGFloat = 1
-    static let cellColumns: CGFloat = 3
+    static let spacingWitdh: CGFloat = 1 // 셀간의 간격
+    static let cellColumns: CGFloat = 3 // 한줄의 몇개의 컬렉션?
     private init() {}
 }
 

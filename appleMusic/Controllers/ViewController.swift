@@ -9,10 +9,12 @@ import UIKit
 import SwiftUI
 
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    let searchController = UISearchController()
+    // let searchController = UISearchController()
     
+    
+    let searchController = UISearchController(searchResultsController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController)
     
     @IBOutlet weak var musicTableView: UITableView!
     
@@ -24,6 +26,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSearchBar()
         setupTableView()
         setupDatas()
         
@@ -39,8 +42,9 @@ class ViewController: UIViewController {
     
     
     func setupTableView() {
+        
+        musicTableView.dataSource? = self
         musicTableView.delegate = self
-        musicTableView.dataSource = self
         
         // Nib파일 사용시 등록 과정 필요
         // 스토리보드안에 같이 등록한것이 아닌 따로 Nib파일을 만들어서 등록을 해줘야한다.
@@ -102,10 +106,13 @@ extension ViewController: UITableViewDelegate {
     
     
     // 자동적으로 셀 높이 잡아주는 속성 (유동적 셀)
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
 }
 
 extension ViewController: UISearchBarDelegate {
