@@ -110,6 +110,26 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        print(searchText)
+        // 다시 빈 배열로 만들기 ⭐️
+        self.musicArrays = []
+
+        // 네트워킹 시작
+        networkManager.fetchMusic(searchTerm: searchText) { result in
+            switch result {
+            case .success(let musicDatas):
+                self.musicArrays = musicDatas
+                DispatchQueue.main.async {
+                    self.musicTableView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     
 }
 
