@@ -5,7 +5,9 @@
 //  Created by 이명진 on 2023/07/21.
 //
 
-import UIKit
+import Foundation
+
+//MARK: - 네트워크에서 발생할 수 있는 에러 정의
 
 enum NetworkError: Error {
     case networkingError
@@ -65,7 +67,6 @@ final class NetworkManager {
                 completion(.failure(.parseError))
             }
         }
-        
         task.resume()
     }
     
