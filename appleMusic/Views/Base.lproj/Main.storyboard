@@ -58,13 +58,27 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="teS-Uw-ejY">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="teS-Uw-ejY" customClass="MusicCollectionViewCell" customModule="appleMusic" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1bc-rt-cmf">
                                             <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qee-57-4FT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="qee-57-4FT" secondAttribute="bottom" id="6Zp-70-YsC"/>
+                                                <constraint firstItem="qee-57-4FT" firstAttribute="leading" secondItem="1bc-rt-cmf" secondAttribute="leading" id="7To-Ub-gfB"/>
+                                                <constraint firstItem="qee-57-4FT" firstAttribute="top" secondItem="1bc-rt-cmf" secondAttribute="top" id="Ekk-MZ-0MH"/>
+                                                <constraint firstAttribute="trailing" secondItem="qee-57-4FT" secondAttribute="trailing" id="Yxv-8U-akx"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="mainImageView" destination="qee-57-4FT" id="hxS-Sl-QzV"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -81,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zkk-ch-OXA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2010" y="14"/>
+            <point key="canvasLocation" x="2363" y="-2"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jkq-vr-amz">
