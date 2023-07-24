@@ -104,9 +104,9 @@
 		718BEFC62A615E95000D77A9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				718BEFB72A615E60000D77A9 /* Main.storyboard */,
 				71C7443F2A66B39D00D5ACCC /* MusicCellTableViewCell.swift */,
 				71C744402A66B39D00D5ACCC /* MusicCellTableViewCell.xib */,
-				718BEFB72A615E60000D77A9 /* Main.storyboard */,
 				714591F42A6E9C1B007449CE /* MusicCollectionViewCell.swift */,
 			);
 			path = Views;

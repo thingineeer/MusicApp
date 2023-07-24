@@ -11,29 +11,32 @@ import SwiftUI
 
 final class ViewController: UIViewController {
     
-    // let searchController = UISearchController()
+    // 🍏 서치 컨트롤러 생성 ===> 네비게이션 아이템에 할당
+//    let searchController = UISearchController()
     
+    // 🍎 서치 Results컨트롤러 ⭐️
+    //let sear = UISearchController(searchResultsController: <#T##UIViewController?#>)
     
     let searchController = UISearchController(searchResultsController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController)
     
     @IBOutlet weak var musicTableView: UITableView!
     
+    // 네트워크 매니저 (싱글톤)
     var networkManager = NetworkManager.shared
     
-    // 음악 데이터 빈배열
+    // (음악 데이터를 다루기 위함) 빈배열로 시작
     var musicArrays: [Music] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupSearchBar()
         setupTableView()
         setupDatas()
-        
     }
     
+    // 서치바 셋팅
     func setupSearchBar() {
-        
         self.title = "Music Search"
         navigationItem.searchController = searchController
         
@@ -49,17 +52,16 @@ final class ViewController: UIViewController {
         searchController.searchBar.autocapitalizationType = .none
     }
     
-    
+    // 테이블뷰 셋팅
     func setupTableView() {
-        
         musicTableView.dataSource = self
         musicTableView.delegate = self
+        // Nib파일을 사용한다면 등록의 과정이 필요
         
-        // Nib파일 사용시 등록 과정 필요
-        // 스토리보드안에 같이 등록한것이 아닌 따로 Nib파일을 만들어서 등록을 해줘야한다.
         musicTableView.register(UINib(nibName: Cell.musicCellIdentifier, bundle: nil), forCellReuseIdentifier: Cell.musicCellIdentifier)
+        
+        //musicTableView.rowHeight = 120
     }
-    
     
     // 데이터 셋업
     func setupDatas() {
@@ -81,16 +83,17 @@ final class ViewController: UIViewController {
     }
 }
 
-
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(#function)
         return self.musicArrays.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = musicTableView.dequeueReusableCell(withIdentifier: Cell.musicCellIdentifier, for: indexPath) as! MusicCellTableViewCell
+        
+
         
         cell.imageUrl = musicArrays[indexPath.row].imageUrl
         
@@ -101,28 +104,28 @@ extension ViewController: UITableViewDataSource {
         
         cell.selectionStyle = .none
         return cell
-        
-        
     }
-
 }
 
-
 extension ViewController: UITableViewDelegate {
-    
-    
-    // 자동적으로 셀 높이 잡아주는 속성 (유동적 셀)
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-    
+    // 테이블뷰 셀의 높이를 유동적으로 조절하고 싶다면 구현할 수 있는 메서드
+    // (musicTableView.rowHeight = 120 대신에 사용가능)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
+    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+
 }
+
+
+//MARK: - 🍏 (단순) 서치바 확장
 
 //extension ViewController: UISearchBarDelegate {
 //
+    // 유저가 글자를 입력하는 순간마다 호출되는 메서드
 //    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 //
 //        print(searchText)
@@ -143,7 +146,29 @@ extension ViewController: UITableViewDelegate {
 //        }
 //    }
 //
-//
+//    // 검색(Search) 버튼을 눌렀을때 호출되는 메서드
+////    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+////        guard let text = searchController.searchBar.text else {
+////            return
+////        }
+////        print(text)
+////        // 다시 빈 배열로 만들기 ⭐️
+////        self.musicArrays = []
+////
+////        // 네트워킹 시작
+////        networkManager.fetchMusic(searchTerm: text) { result in
+////            switch result {
+////            case .success(let musicDatas):
+////                self.musicArrays = musicDatas
+////                DispatchQueue.main.async {
+////                    self.musicTableView.reloadData()
+////                }
+////            case .failure(let error):
+////                print(error.localizedDescription)
+////            }
+////        }
+////        self.view.endEditing(true)
+////    }
 //}
 
 
