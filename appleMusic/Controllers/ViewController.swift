@@ -61,23 +61,21 @@ final class ViewController: UIViewController {
     }
     
     
+    // 데이터 셋업
     func setupDatas() {
-        
-        networkManager.fetchMusic(searchTerm: "jazz") { result in
-            
+        // 네트워킹의 시작
+        networkManager.fetchMusic(searchTerm: "Kpop") { result in
+            print(#function)
             switch result {
-            case .success(let musicData):
-                
-                print("데이터를 잘 받았음")
-                self.musicArrays = musicData
-                
-                // 테이블뷰 리로드(메인쓰레드에서)
+            case .success(let musicDatas):
+                // 데이터(배열)을 받아오고 난 후
+                self.musicArrays = musicDatas
+                // 테이블뷰 리로드
                 DispatchQueue.main.async {
                     self.musicTableView.reloadData()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
-                
             }
         }
     }
@@ -123,30 +121,30 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        print(searchText)
-        // 다시 빈 배열로 만들기 ⭐️
-        self.musicArrays = []
-
-        // 네트워킹 시작
-        networkManager.fetchMusic(searchTerm: searchText) { result in
-            switch result {
-            case .success(let musicDatas):
-                self.musicArrays = musicDatas
-                DispatchQueue.main.async {
-                    self.musicTableView.reloadData()
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    
-}
+//extension ViewController: UISearchBarDelegate {
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//
+//        print(searchText)
+//        // 다시 빈 배열로 만들기 ⭐️
+//        self.musicArrays = []
+//
+//        // 네트워킹 시작
+//        networkManager.fetchMusic(searchTerm: searchText) { result in
+//            switch result {
+//            case .success(let musicDatas):
+//                self.musicArrays = musicDatas
+//                DispatchQueue.main.async {
+//                    self.musicTableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+//
+//
+//}
 
 
 //MARK: -  🍎 검색하는 동안 (새로운 화면을 보여주는) 복잡한 내용 구현 가능
