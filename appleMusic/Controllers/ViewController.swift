@@ -52,7 +52,7 @@ final class ViewController: UIViewController {
     
     func setupTableView() {
         
-        musicTableView.dataSource? = self
+        musicTableView.dataSource = self
         musicTableView.delegate = self
         
         // Nib파일 사용시 등록 과정 필요

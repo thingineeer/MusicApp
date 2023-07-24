@@ -29,18 +29,15 @@ class SearchResultViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //view.backgroundColor = UIColor.red.withAlphaComponent(0.5)
         view.backgroundColor = .white
         setupCollectionView()
         //setupDatas()
-        
     }
-    
-    
+
     func setupCollectionView() {
         // 컬렉션뷰의 레이아웃을 담당하는 객체
         //let flowLayout = UICollectionViewFlowLayout()
@@ -50,7 +47,6 @@ class SearchResultViewController: UIViewController {
         // 컬렉션뷰의 스크롤 방향 설정
         flowLayout.scrollDirection = .vertical
         
-        // 컬렉션 개수만큼 줄 간격 조정
         let collectionCellWidth = (UIScreen.main.bounds.width - CVCell.spacingWitdh * (CVCell.cellColumns - 1)) / CVCell.cellColumns
         
         flowLayout.itemSize = CGSize(width: collectionCellWidth, height: collectionCellWidth)
@@ -91,8 +87,6 @@ class SearchResultViewController: UIViewController {
     
 }
 
-
-
 extension SearchResultViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return musicArrays.count
@@ -104,5 +98,6 @@ extension SearchResultViewController: UICollectionViewDataSource {
         
         return cell
     }
+    
     
 }
